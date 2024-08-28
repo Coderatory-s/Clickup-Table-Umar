@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { XIcon } from "lucide-react"; // Icon for closing the modal
-import { Button } from "@/components/ui/button";
 import IconButton from "./IconButton";
 
 const TaskModal = ({ task, isOpen, onClose }) => {

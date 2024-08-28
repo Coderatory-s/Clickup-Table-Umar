@@ -11,8 +11,8 @@ export const SortableItem = ({ id, task }) => {
     transform: CSS.Transform.toString(transform),
     transition,
     zIndex: isDragging ? 44 : "auto", // Bring item to front while dragging
-    opacity: isDragging ? 0.5 : 1, // Reduce opacity while dragging\
-    
+    opacity: isDragging ? 0.5 : 1, // Reduce opacity while dragging
+
   }
   
 
