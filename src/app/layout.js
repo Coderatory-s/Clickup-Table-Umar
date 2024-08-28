@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <header className="bg-gray-900 text-white">
           <nav className="container mx-auto flex items-center justify-between p-4">
-            <div className="text-2xl font-bold">My App</div>
+            <div className="text-2xl font-bold">Mini Clickup</div>
             <div className="space-x-4">
               <Link href="/tasks" className="hover:border hover:border-blue-600 p-2 rounded-full">Tasks</Link>
               <Link href="/board" className="hover:border hover:border-blue-600 p-2 rounded-full">Board</Link>
