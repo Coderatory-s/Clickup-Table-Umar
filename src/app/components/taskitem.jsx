@@ -5,7 +5,8 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import TaskModal from './TaskModal'; // Import the TaskModal component
+
+
 
 import {
   AlertDialog,
@@ -21,6 +22,7 @@ import {
 import { Calendar } from "@/components/ui/calendar"
 import { DatePickerDemo } from './DatePicker';
 import { TableCell, TableRow } from '@/components/ui/table';
+import TaskModal from './taskModal';
 
 
 const TaskItem = ({ task, index, isSubtask, toggleTask, expandedTasks, handleDragStart }) => {
