@@ -17,7 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import TaskItem from './taskitem'; // Import TaskItem component
-import TaskModal from './TaskModal'; // Import TaskModal component
+import TaskModal from './taskModal'; // Import TaskModal component
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
