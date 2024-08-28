@@ -12,8 +12,8 @@ const tasks = [
       sprintPoints: 5,
       tags: ["UI/UX", "Design"],
       subtasks: [
-        { id: 11, assignee: "Jack",  priority: "Medium", name: "Create Wireframe", status: "Pending", timeEstimate: "3h" },
-        { id: 12, assignee: "Alice",  priority: "High", name: "Design Mockups", status: "Pending", timeEstimate: "5h" },
+        { id: 11, assignee: "Jack",  priority: "Medium", name: "Create Wireframe", status: "Pending", timeEstimate: "3h",  tags: ["DevOps", "CI/CD"], },
+        { id: 12, assignee: "Alice",  priority: "High", name: "Design Mockups", status: "Pending", timeEstimate: "5h",  tags: ["Backend", "Cyber"] },
       ],
     },
     {
@@ -27,7 +27,7 @@ const tasks = [
       sprintPoints: 8,
       tags: ["Backend", "Auth"],
       subtasks: [
-        { id: 21, assignee: "Adam",  priority: "Low", name: "Setup JWT", status: "Todo", timeEstimate: "4h" },
+        { id: 21, assignee: "Adam",  priority: "Low", name: "Setup JWT", status: "Todo", timeEstimate: "4h",  tags: ["Data", "Analytics"] },
         { id: 22, assignee: "Bob",   priority: "Medium", name: "Implement OAuth", status: "Pending", timeEstimate: "8h" },
       ],
     },
@@ -96,8 +96,8 @@ const tasks = [
       sprintPoints: 10,
       tags: ["Frontend", "Dashboard"],
       subtasks: [
-        { id: 71,assignee: "Lucy",   priority: "High", name: "Create Dashboard Layout", status: "Todo", timeEstimate: "5h" },
-        { id: 72,assignee: "Zampa",  priority: "Low", name: "Integrate API", status: "Pending", timeEstimate: "10h" },
+        { id: 71,assignee: "Lucy",   priority: "High", name: "Create Dashboard Layout", status: "Todo", timeEstimate: "5h",  tags: ["Tea", "Level"] },
+        { id: 72,assignee: "Zampa",  priority: "Low", name: "Integrate API", status: "Pending", timeEstimate: "10h",  tags: ["Dashboard", "PC"] },
       ],
     },
     {
@@ -111,8 +111,8 @@ const tasks = [
       sprintPoints: 5,
       tags: ["Backend", "Database"],
       subtasks: [
-        { id: 81,  priority: "High", assignee: "Einstein", name: "Review Current Queries", status: "Todo", timeEstimate: "3h" },
-        { id: 82,  priority: "High", assignee: "John", name: "Optimize Slow Queries", status: "Pending", timeEstimate: "4h" },
+        { id: 81,  priority: "High", assignee: "Einstein", name: "Review Current Queries", status: "Todo", timeEstimate: "3h",  tags: ["Moon", "Walker"] },
+        { id: 82,  priority: "High", assignee: "John", name: "Optimize Slow Queries", status: "Pending", timeEstimate: "4h",  tags: ["Nift", "Crime"] },
       ],
     },
     {
@@ -139,7 +139,7 @@ const tasks = [
       tags: ["Bugfix", "Payment"],
       subtasks: [
         { id: 101, assignee: "Henry",   priority: "High", name: "Identify Bugs", status: "Pending", timeEstimate: "2h" },
-        { id: 102, assignee: "Kubernetes",  priority: "Medium",  name: "Fix Identified Bugs", status: "Todo", timeEstimate: "6h" },
+        { id: 102, assignee: "Kubernetes",  priority: "Medium",  name: "Fix Identified Bugs", status: "Todo", timeEstimate: "6h",  tags: ["Backend", "Meta"] },
       ],
     },
   ];

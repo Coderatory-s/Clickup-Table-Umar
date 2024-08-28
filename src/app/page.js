@@ -33,8 +33,10 @@ import tasks from "./todosData/todosData";
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
-      <TasksTable tasks={tasks} />
+    <div className="">
+    <div className="min-h-screen grid place-items-center">
+          <h1 className="font-semibold  sm:text-5xl text-center">Welcome To Click Up Table</h1>
+        </div>
     </div>
   );
 }
