@@ -1,6 +1,8 @@
+// tasksTable.jsx
+
 "use client";
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -8,19 +10,19 @@ import {
   KeyboardSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import TaskItem from './taskitem'; // Import TaskItem component
-import TaskModal from './taskModal'; // Import TaskModal component
-import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronDownIcon, ChevronRightIcon } from 'lucide-react'; // Import icons
+} from "@dnd-kit/sortable";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+import TaskItem from "./taskitem"; // Import TaskItem component
+import TaskModal from "./taskModal"; // Import TaskModal component
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ChevronDownIcon, ChevronRightIcon } from "lucide-react"; // Import icons
 
 const statuses = ["Todo", "In Progress", "Pending", "Parking Lot"]; // Define your statuses
 
@@ -38,9 +40,17 @@ const TasksTable = ({ tasks }) => {
     })
   );
 
-  function handleDragEnd(event) {
-    const { active, over } = event;
+  // Memoize groupedTasks to avoid unnecessary recalculations
+  const groupedTasks = useMemo(() => {
+    return statuses.reduce((acc, status) => {
+      acc[status] = taskList.filter((task) => task.status === status);
+      return acc;
+    }, {});
+  }, [taskList]);
 
+  // Memoized function to handle drag end event
+  const handleDragEnd = useCallback((event) => {
+    const { active, over } = event;
     if (over && active.id !== over.id) {
       setTaskList((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
@@ -48,45 +58,40 @@ const TasksTable = ({ tasks }) => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-  }
+  }, []);
 
-  const toggleTask = (taskId) => {
+  // Memoized toggle task function
+  const toggleTask = useCallback((taskId) => {
     setExpandedTasks((prev) => ({
       ...prev,
       [taskId]: !prev[taskId],
     }));
-  };
+  }, []);
 
   // Function to open the modal with the clicked task
-  const openModal = (task) => {
+  const openModal = useCallback((task) => {
     setSelectedTask(task);
     setIsModalOpen(true);
-  };
+  }, []);
 
   // Function to close the modal
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedTask(null);
-  };
+  }, []);
 
   // Function to toggle the collapse of each section
-  const toggleSection = (status) => {
+  const toggleSection = useCallback((status) => {
     setCollapsedSections((prev) => ({
       ...prev,
       [status]: !prev[status],
     }));
-  };
-
-  // Group tasks by status
-  const groupedTasks = statuses.reduce((acc, status) => {
-    acc[status] = taskList.filter((task) => task.status === status);
-    return acc;
-  }, {});
+  }, []);
 
   return (
-    <div className='max-w-7xl mx-auto my-10'>
-      <div className='flex items-center justify-center'>
-      <h2 className='text-2xl font-bold mb-4'>Tasks Table</h2>
+    <div className="max-w-7xl mx-auto my-10">
+      <div className="flex items-center justify-center">
+        <h2 className="text-2xl font-bold mb-4">Tasks Table</h2>
       </div>
       <DndContext
         sensors={sensors}
@@ -105,6 +110,7 @@ const TasksTable = ({ tasks }) => {
                     size="sm"
                     onClick={() => toggleSection(status)}
                     className="rounded-md ml-2"
+                    aria-label={`Toggle ${status} section`}
                   >
                     {collapsedSections[status] ? (
                       <ChevronRightIcon className="w-5 h-5" />
@@ -118,19 +124,19 @@ const TasksTable = ({ tasks }) => {
                     items={groupedTasks[status].map((task) => task.id)}
                     strategy={verticalListSortingStrategy}
                   >
-                    <Table className='w-full border-collapse'>
+                    <Table className="w-full border-collapse">
                       <TableHeader>
-                        <TableRow className='bg-gray-300'>
-                          <TableHead className='p-4'>Drag</TableHead>
-                          <TableHead className='p-4'></TableHead>
-                          <TableHead className='p-4'>Name</TableHead>
-                          <TableHead className='p-4'>Assignee</TableHead>
-                          <TableHead className='p-4'>Due Date</TableHead>
-                          <TableHead className='p-4'>Priority</TableHead>
-                          <TableHead className='p-4'>Status</TableHead>
-                          <TableHead className='p-4'>Time Estimate</TableHead>
-                          <TableHead className='p-4'>Sprint Points</TableHead>
-                          <TableHead className='p-4'>Tags</TableHead>
+                        <TableRow className="bg-gray-300">
+                          <TableHead className="p-4">Drag</TableHead>
+                          <TableHead className="p-4"></TableHead>
+                          <TableHead className="p-4">Name</TableHead>
+                          <TableHead className="p-4">Assignee</TableHead>
+                          <TableHead className="p-4">Due Date</TableHead>
+                          <TableHead className="p-4">Priority</TableHead>
+                          <TableHead className="p-4">Status</TableHead>
+                          <TableHead className="p-4">Time Estimate</TableHead>
+                          <TableHead className="p-4">Sprint Points</TableHead>
+                          <TableHead className="p-4">Tags</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -153,13 +159,7 @@ const TasksTable = ({ tasks }) => {
         </div>
       </DndContext>
 
-      {isModalOpen && (
-        <TaskModal
-          task={selectedTask}
-          isOpen={isModalOpen}
-          onClose={closeModal}
-        />
-      )}
+      {isModalOpen && <TaskModal task={selectedTask} isOpen={isModalOpen} onClose={closeModal} />}
     </div>
   );
 };

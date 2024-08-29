@@ -2,8 +2,9 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { memo } from "react";
 
-export const SortableItem = ({ id, task }) => {
+const SortableItem = memo(({ id, task }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({ id });
 
@@ -12,21 +13,16 @@ export const SortableItem = ({ id, task }) => {
     transition,
     zIndex: isDragging ? 44 : "auto", // Bring item to front while dragging
     opacity: isDragging ? 0.5 : 1, // Reduce opacity while dragging
+  };
 
-  }
-  
-
-
-  
   return (
     <div
-    
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      className={`p-4 rounded-lg shadow mb-4 overscroll-none bg-white   ${
-        isDragging ? "border-2 border-blue-500 z-34 " : ""
+      className={`p-4 rounded-lg shadow mb-4 overscroll-none bg-white ${
+        isDragging ? "border-2 border-blue-500 z-34" : ""
       }`}
     >
       <h3 className="text-md font-semibold">{task.name}</h3>
@@ -53,4 +49,6 @@ export const SortableItem = ({ id, task }) => {
       </div>
     </div>
   );
-};
+});
+
+export { SortableItem };

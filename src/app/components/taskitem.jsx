@@ -9,6 +9,11 @@ import { Button } from "@/components/ui/button";
 import { DatePickerDemo } from './DatePicker';
 import { TableCell, TableRow } from '@/components/ui/table';
 import TaskModal from './taskModal';
+import ParkingLotIcon from './icons/parkingLot';
+import InProgress from './icons/InProgress';
+import Pending from './icons/Pending';
+import Todos from './icons/Todos';
+import { getRandomColor } from '../utils/RandomColor';
 
 const TaskItem = ({ task, index, isSubtask, toggleTask, expandedTasks, handleDragStart }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,53 +36,21 @@ const TaskItem = ({ task, index, isSubtask, toggleTask, expandedTasks, handleDra
   };
 
 
-  const getRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
 
 
   // Define status icons and colors in an object mapping
   const statusIcons = {
     'Parking Lot': {
-      icon: (
-        <svg  className="mr-2" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="8" cy="8" r="5" transform="rotate(90 8 8)" fill="#F8AE00"/>
-        <circle cx="8" cy="8" r="7.5" transform="rotate(90 8 8)" stroke="#F8AE00"/>
-        </svg>
-        
-      ),
+      icon: <ParkingLotIcon/>
     },
     'In Progress': {
-      icon: (
-        <svg className="mr-2" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="8" cy="8" r="5" fill="#5F55EE"/>
-<circle cx="8" cy="8" r="7.5" stroke="#5F55EE"/>
-</svg>
-
-      ),
+      icon: <InProgress/>
     },
     'Pending': {
-      icon: (
-        <svg className='mr-2' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="8" cy="8" r="4.5" transform="rotate(90 8 8)" fill="#B660E0" stroke="#B660E0"/>
-        <circle cx="8" cy="8" r="7.5" transform="rotate(90 8 8)" stroke="#B660E0"/>
-        </svg>
-        
-      ),
+      icon: <Pending/>
     },
     'Todo': {
-      icon: (
-        <svg className='mr-2' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="8" cy="8" r="4.5" transform="rotate(90 8 8)" fill="#87909E" stroke="#87909E"/>
-        <circle cx="8" cy="8" r="7.5" transform="rotate(90 8 8)" stroke="#87909E"/>
-        </svg>
-        
-      ),
+      icon: <Todos/>
     },
   };
 
@@ -118,16 +91,7 @@ const TaskItem = ({ task, index, isSubtask, toggleTask, expandedTasks, handleDra
           {getStatusIcon(status)}
           {name}
         </TableCell>
-       {/* <TableCell className="p-4">
-       <p
-    className="rounded-full text-white w-[20px] text-center pl-1 pr-1"
-    style={{ backgroundColor: getRandomColor() }}
-  >
-    {assignee[0]}
-  </p>
-</TableCell> */}
-
-
+ 
 <TableCell className="p-4 relative">
       <div className="group">
       <p
